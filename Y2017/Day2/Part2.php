@@ -148,12 +148,11 @@ class EvenDivisibleNumberResolverResult
         $spreadsheetRow1 = implode("\t", array_shift($spreadsheetData));
         $formattedSpreadsheetRow1 = implode("\t", array_shift($formattedSpreadsheetData));
 
-        array_walk($spreadsheetData, function (&$spreadsheetRow) {
-            $spreadsheetRow = str_repeat(' ', 23) . implode("\t", $spreadsheetRow);
-        });
-
-        array_walk($formattedSpreadsheetData, function (&$spreadsheetRow) {
-            $spreadsheetRow = str_repeat(' ', 23) . implode("\t", $spreadsheetRow);
+        $indentSubjects = [&$spreadsheetData, &$formattedSpreadsheetData];
+        array_walk($indentSubjects, function (&$spreadsheetSet) {
+            array_walk($spreadsheetSet, function (&$spreadsheetRow) {
+                $spreadsheetRow = str_repeat(' ', 23) . implode("\t", $spreadsheetRow);
+            });
         });
 
         $sum = $this->sum;
