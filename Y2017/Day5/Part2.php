@@ -5,6 +5,7 @@ namespace Netiul\AoC\Y2017\Day5\Part2;
 $datafiles = [
     __DIR__ . '/Data/Dataset1.aoc',
     __DIR__ . '/Data/Dataset2.aoc',
+    //__DIR__ . '/Data/Dataset3.aoc',
 ];
 
 foreach ($datafiles as $datafile) {
@@ -13,7 +14,10 @@ foreach ($datafiles as $datafile) {
         return (int) $v;
     }, $jumpInstructions);
 
+    $start = microtime(true);
     echo MemoryMazeJumper::jump($jumpInstructions);
+    $time = round(microtime(true) - $start, 6);
+    echo sprintf("Finished in %.6f seconds.\n", $time);
 }
 
 class MemoryMazeJumper
